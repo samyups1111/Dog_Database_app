@@ -12,13 +12,11 @@ class Repository {
     suspend fun getDogBreed(): List<Dog>? {
 
         val dogType = object : TypeToken<List<Dog>>() {}.type
-
         val dogList = Gson().fromJson<List<Dog>>(RetrofitObject.DogApi.getBreeds(), dogType)
 
         Log.d(TAG, "dogList.size = ${dogList.size}")
         Log.d(TAG, "dogList[0] = ${dogList[0]}")
 
         return dogList
-
     }
 }

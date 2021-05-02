@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import sam.samyups.R
 import sam.samyups.model.Dog
 import sam.samyups.model.MainViewModel
-import sam.samyups.util.ViewModelInterface
 
 class DogNamesRecyclerViewAdapter(private val mainViewModel: MainViewModel): RecyclerView.Adapter<DogNamesRecyclerViewHolder>() {
 
