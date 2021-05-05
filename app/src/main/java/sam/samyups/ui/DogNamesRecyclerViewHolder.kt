@@ -29,7 +29,6 @@ class DogNamesRecyclerViewHolder(recyclerViewItem: View, mainViewModel: MainView
             Log.d(TAG, "dog.name = ${dog.name}")
             Log.d(TAG, "viewModelApi.currentDog = ${viewModelApi.currentDog.value?.name}")
             Log.d(TAG, dog?.image?.toString()?.substringAfterLast("=")?.dropLast(1))
-
         }
     }
 }

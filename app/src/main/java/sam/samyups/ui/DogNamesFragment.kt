@@ -1,19 +1,21 @@
 package sam.samyups.ui
 
-import android.R
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
+import sam.samyups.R
 import sam.samyups.databinding.DogNamesFragmentBinding
 import sam.samyups.model.MainViewModel
 import sam.samyups.model.Repository
+import androidx.appcompat.widget.SearchView
 
 class DogNamesFragment : Fragment(){
 
@@ -35,10 +37,11 @@ class DogNamesFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        setHasOptionsMenu(true)
         val fragmentBinding = DogNamesFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         initRecyclerView()
+
         return fragmentBinding.root
     }
 
@@ -68,6 +71,23 @@ class DogNamesFragment : Fragment(){
     private fun initObserver() {
         mainViewModel.getDogList().observe(viewLifecycleOwner, Observer { dogList ->
             dogNamesAdapter.updateList(dogList)
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+        val searchView = menu.findItem(R.id.search_bar).actionView as SearchView?
+
+        searchView?.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                dogNamesAdapter.filter.filter(newText)
+                return false
+            }
         })
     }
 }
