@@ -45,7 +45,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dog_info_recycler"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -58,16 +59,17 @@
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/previous_button"
                 android:src="@drawable/ic_left"
+                android:backgroundTint="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="70dp"
                 android:contentDescription="Previous Dog" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/next_button"
                 android:src="@drawable/ic_right"
-
-                android:layout_marginLeft="20dp"
+                android:backgroundTint="@color/white"
+                android:layout_marginLeft="70dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="Next Dog" />

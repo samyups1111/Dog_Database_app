@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,7 @@ class DogInfoFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val fragmentBinding = FragmentDogInfoBinding.inflate(inflater, container, false)
         binding = fragmentBinding
+        (activity as AppCompatActivity).supportActionBar?.title = "Dog Breed"
         return fragmentBinding.root
     }
 
