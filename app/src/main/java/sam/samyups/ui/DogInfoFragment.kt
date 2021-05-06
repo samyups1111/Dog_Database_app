@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
+import sam.samyups.R
 import sam.samyups.databinding.FragmentDogInfoBinding
 import sam.samyups.model.Dog
 import sam.samyups.model.MainViewModel
@@ -32,7 +33,7 @@ class DogInfoFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val fragmentBinding = FragmentDogInfoBinding.inflate(inflater, container, false)
         binding = fragmentBinding
-        (activity as AppCompatActivity).supportActionBar?.title = "Dog Breed"
+        (activity as AppCompatActivity).supportActionBar?.title = "Breed:"
         return fragmentBinding.root
     }
 
@@ -54,8 +55,10 @@ class DogInfoFragment : Fragment() {
 
             Picasso.with(context)
                     .load(dog?.image?.toString()?.substringAfterLast("=")?.dropLast(1))
+
                     .resize(900, 900)
                     .centerCrop()
+                    .placeholder(R.drawable.loading_animation)
                     .into(binding?.dogInfoPic)
         })
     }
@@ -85,35 +88,23 @@ class DogInfoFragment : Fragment() {
             catch (e: Exception) { mainViewModel.dogListCopy[0]}
             mainViewModel.setCurrentIndex(thisIndex)
         })
-        /**mainViewModel.dogList.observe(viewLifecycleOwner, Observer { dogList ->
-            nextDog = mainViewModel.dogListCopy[currentIndex + 1]
-            Log.d(TAG, "nextDog(2) = ${nextDog.name}")
-        })*/
-
 
         binding?.previousButton?.setOnClickListener {
             if (mainViewModel.currentIndex.value!! > 0) {
                 thisIndex -= 1
                 mainViewModel.setDog(previousDog)
-
-                //mainViewModel.setCurrentIndex(thisIndex - 1)
-                //
-
             }
         }
 
         binding?.nextButton?.setOnClickListener {
             if (mainViewModel.currentIndex.value!! < mainViewModel.dogListCopy.size - 1) {
                 Log.d(TAG, "Next Button clicked")
-                //val nextDog: Dog = mainViewModel.dogList[currentIndex + 1]
                 Log.d(TAG, "viewModel.getDog activated")
                 Log.d(TAG, "newCurrentIndex = ${thisIndex + 1}")
                 Log.d(TAG, "thisDog = ${thisDog.name}")
                 Log.d(TAG, "nextDog = ${nextDog.name}")
                 thisIndex += 1
                 mainViewModel.setDog(nextDog)
-
-                //mainViewModel.setCurrentIndex(thisIndex + 1)
                 Log.d(TAG, "nexButton: thisDog.name = ${thisDog.name}")
             }
 
