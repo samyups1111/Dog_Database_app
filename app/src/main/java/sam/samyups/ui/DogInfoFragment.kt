@@ -48,8 +48,11 @@ class DogInfoFragment : Fragment() {
 
             dogInfoAdapter.getCurrentDog(dog)
 
-            Picasso.with(context).load(dog?.image?.toString()?.substringAfterLast("=")?.dropLast(1)).into(binding?.dogInfoPic)
-
+            Picasso.with(context)
+                    .load(dog?.image?.toString()?.substringAfterLast("=")?.dropLast(1))
+                    .resize(900, 900)
+                    .centerCrop()
+                    .into(binding?.dogInfoPic)
         })
     }
 
@@ -57,6 +60,16 @@ class DogInfoFragment : Fragment() {
         binding?.dogInfoRecycler?.apply {
             adapter = dogInfoAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun initButtons() {
+        binding?.previousButton?.setOnClickListener {
+            val currentdog = dogInfoAdapter.currentDog.name
+        }
+
+        binding?.nextButton?.setOnClickListener {
+
         }
     }
 }

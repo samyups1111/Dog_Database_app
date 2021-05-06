@@ -51,66 +51,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/dog_info_alt_names"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Alt Names: " />
-
-        <TextView
-            android:id="@+id/alt_names"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/dog_info_wikipedia_url"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Wikipedia Url: " />
-
-        <TextView
-            android:id="@+id/wikipedia_url"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/dog_info_origin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Origin: " />
-
-        <TextView
-            android:id="@+id/origin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
             android:id="@+id/dog_info_weight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

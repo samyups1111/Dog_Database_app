@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="viewModel"
             type="sam.samyups.model.MainViewModel" />
     </data>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,8 +45,34 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dog_info_recycler"
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/previous_button"
+                android:src="@drawable/ic_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:contentDescription="Previous Dog" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/next_button"
+                android:src="@drawable/ic_right"
+
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Next Dog" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>
