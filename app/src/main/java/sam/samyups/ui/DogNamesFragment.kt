@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -41,7 +42,7 @@ class DogNamesFragment : Fragment(){
         val fragmentBinding = DogNamesFragmentBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         initRecyclerView()
-
+        (activity as AppCompatActivity).supportActionBar?.title = "Dog Breeds:"
         return fragmentBinding.root
     }
 
