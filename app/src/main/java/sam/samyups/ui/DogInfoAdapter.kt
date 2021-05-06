@@ -24,5 +24,6 @@ class DogInfoAdapter: RecyclerView.Adapter<DogInfoViewHolder>() {
 
     fun getCurrentDog(dog: Dog) {
         currentDog = dog
+        notifyDataSetChanged()
     }
 }
