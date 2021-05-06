@@ -1,6 +1,7 @@
 package sam.samyups.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import sam.samyups.databinding.FragmentDogInfoBinding
+import sam.samyups.model.Dog
 import sam.samyups.model.MainViewModel
 import sam.samyups.model.Repository
 
@@ -24,6 +26,7 @@ class DogInfoFragment : Fragment() {
         MainViewModel.ViewModelFactory(repository)
     }
     private val dogInfoAdapter = DogInfoAdapter()
+    private var thisIndex = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,13 +44,12 @@ class DogInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
         initObserver()
+        initButtons()
     }
 
     private fun initObserver() {
         mainViewModel.currentDog.observe(viewLifecycleOwner, Observer { dog ->
-
             binding?.dogInfoName?.text = dog.name
-
             dogInfoAdapter.getCurrentDog(dog)
 
             Picasso.with(context)
@@ -66,11 +68,54 @@ class DogInfoFragment : Fragment() {
     }
 
     private fun initButtons() {
+        var thisDog = Dog()
+        var nextDog = Dog()
+        var previousDog = Dog()
+        mainViewModel.currentIndex.observe(viewLifecycleOwner, Observer { index ->
+            thisIndex = index
+            Log.d(TAG, "currentIndex = $thisIndex")
+        })
+        mainViewModel.currentDog.observe(viewLifecycleOwner, Observer { dog ->
+            thisDog = dog
+            Log.d(TAG, "thisDog (1) = ${thisDog.name}")
+            nextDog = try {mainViewModel.dogListCopy[thisIndex + 1] }
+            catch (e: Exception) {mainViewModel.dogListCopy[mainViewModel.dogListCopy.size - 1]}
+            Log.d(TAG, "nextDog(2) = ${nextDog.name}")
+            previousDog = try {mainViewModel.dogListCopy[thisIndex - 1] ?: mainViewModel.dogListCopy[0]}
+            catch (e: Exception) { mainViewModel.dogListCopy[0]}
+            mainViewModel.setCurrentIndex(thisIndex)
+        })
+        /**mainViewModel.dogList.observe(viewLifecycleOwner, Observer { dogList ->
+            nextDog = mainViewModel.dogListCopy[currentIndex + 1]
+            Log.d(TAG, "nextDog(2) = ${nextDog.name}")
+        })*/
+
+
         binding?.previousButton?.setOnClickListener {
-            val currentdog = dogInfoAdapter.currentDog.name
+            if (mainViewModel.currentIndex.value!! > 0) {
+                thisIndex -= 1
+                mainViewModel.setDog(previousDog)
+
+                //mainViewModel.setCurrentIndex(thisIndex - 1)
+                //
+
+            }
         }
 
         binding?.nextButton?.setOnClickListener {
+            if (mainViewModel.currentIndex.value!! < mainViewModel.dogListCopy.size - 1) {
+                Log.d(TAG, "Next Button clicked")
+                //val nextDog: Dog = mainViewModel.dogList[currentIndex + 1]
+                Log.d(TAG, "viewModel.getDog activated")
+                Log.d(TAG, "newCurrentIndex = ${thisIndex + 1}")
+                Log.d(TAG, "thisDog = ${thisDog.name}")
+                Log.d(TAG, "nextDog = ${nextDog.name}")
+                thisIndex += 1
+                mainViewModel.setDog(nextDog)
+
+                //mainViewModel.setCurrentIndex(thisIndex + 1)
+                Log.d(TAG, "nexButton: thisDog.name = ${thisDog.name}")
+            }
 
         }
     }

@@ -27,7 +27,8 @@ class DogNamesRecyclerViewAdapter(private val mainViewModel: MainViewModel): Rec
     override fun onBindViewHolder(holder: DogNamesRecyclerViewHolder, position: Int) {
         Log.d(TAG,  "onBindViewHolder")
         val currentDog = filteredDogList[position]
-        holder.bind(currentDog)
+        Log.d(TAG, "viewModel.currentIndex = ${mainViewModel.currentIndex.value}")
+        holder.bind(currentDog, position)
     }
 
     override fun getItemCount(): Int {
