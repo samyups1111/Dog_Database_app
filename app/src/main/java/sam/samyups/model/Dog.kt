@@ -1,5 +1,6 @@
 package sam.samyups.model
 
+
 data class Dog(
     val id: String = "",
     val name: String = "",

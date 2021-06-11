@@ -8,7 +8,7 @@ import sam.samyups.model.Dog
 
 class DogInfoAdapter: RecyclerView.Adapter<DogInfoViewHolder>() {
 
-    var currentDog = Dog()
+    private var currentDog = Dog()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogInfoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.dog_info_recycler_item, parent, false)
         return DogInfoViewHolder(view)

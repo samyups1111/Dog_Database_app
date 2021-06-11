@@ -1,32 +1,27 @@
 package sam.samyups.ui
 
-
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.MaterialToolbar
 import sam.samyups.R
 import sam.samyups.databinding.DogNamesFragmentBinding
-import sam.samyups.model.MainViewModel
-import sam.samyups.model.Repository
 import androidx.appcompat.widget.SearchView
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import dagger.hilt.android.AndroidEntryPoint
+import sam.samyups.model.Dog
+import sam.samyups.model.MainViewModel
 
+@AndroidEntryPoint
 class DogNamesFragment : Fragment(){
 
     private val TAG = "DogNamesFragment"
-
     private var binding : DogNamesFragmentBinding? = null
-    private val repository= Repository()
-    private val mainViewModel : MainViewModel by activityViewModels {
-        MainViewModel.ViewModelFactory(repository)
-    }
+    private val mainViewModel : MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private lateinit var dogNamesAdapter: DogNamesRecyclerViewAdapter
 
     override fun onAttach(context: Context) {
@@ -43,10 +38,9 @@ class DogNamesFragment : Fragment(){
         binding = fragmentBinding
         initRecyclerView()
         (activity as AppCompatActivity).supportActionBar?.title = "Dog Breeds:"
+
         return fragmentBinding.root
     }
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +50,6 @@ class DogNamesFragment : Fragment(){
 
     private fun initBinding() {
         binding?.apply {
-            viewModel = mainViewModel
             lifecycleOwner = viewLifecycleOwner
         }
     }
@@ -90,5 +83,21 @@ class DogNamesFragment : Fragment(){
                 return false
             }
         })
+    }
+
+    private fun displayError(message: String?) {
+        if (message != null) {
+            binding?.errorBox?.text = message
+        } else {
+            binding?.errorBox?.text = "Unknown Error"
+        }
+    }
+
+    private fun displayProgressBar(isDisplayed: Boolean) {
+        binding?.progressBar?.visibility = if (isDisplayed) View.VISIBLE else View.GONE
+    }
+
+    private fun appendDogNames(dogs: List<Dog>) {
+        dogNamesAdapter.updateList(dogs)
     }
 }
