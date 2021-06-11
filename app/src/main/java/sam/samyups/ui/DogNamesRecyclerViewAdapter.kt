@@ -12,7 +12,9 @@ import sam.samyups.model.MainViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DogNamesRecyclerViewAdapter(private val mainViewModel: MainViewModel): RecyclerView.Adapter<DogNamesRecyclerViewHolder>(), Filterable {
+class DogNamesRecyclerViewAdapter(private val mainViewModel: MainViewModel
+    ): RecyclerView.Adapter<DogNamesRecyclerViewHolder>(),
+    Filterable {
 
     private var dogList = emptyList<Dog>()
     var filteredDogList = emptyList<Dog>()
@@ -27,7 +29,6 @@ class DogNamesRecyclerViewAdapter(private val mainViewModel: MainViewModel): Rec
     override fun onBindViewHolder(holder: DogNamesRecyclerViewHolder, position: Int) {
         Log.d(TAG,  "onBindViewHolder")
         val currentDog = filteredDogList[position]
-        Log.d(TAG, "viewModel.currentIndex = ${mainViewModel.currentIndex.value}")
         holder.bind(currentDog, position)
     }
 

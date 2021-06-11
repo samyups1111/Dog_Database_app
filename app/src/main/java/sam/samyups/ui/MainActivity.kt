@@ -5,10 +5,13 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import sam.samyups.R
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = "MainActivity"
 
     private lateinit var navController: NavController
 

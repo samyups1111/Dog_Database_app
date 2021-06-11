@@ -7,25 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import sam.samyups.R
 import sam.samyups.databinding.FragmentDogInfoBinding
 import sam.samyups.model.Dog
 import sam.samyups.model.MainViewModel
-import sam.samyups.model.Repository
 
-
+@AndroidEntryPoint
 class DogInfoFragment : Fragment() {
 
     private val TAG = "DogInfoFragment"
-    private val repository = Repository()
     private var binding : FragmentDogInfoBinding? = null
-    private val mainViewModel : MainViewModel by activityViewModels {
-        MainViewModel.ViewModelFactory(repository)
-    }
+    private val mainViewModel : MainViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val dogInfoAdapter = DogInfoAdapter()
     private var thisIndex = 0
 
@@ -40,7 +37,6 @@ class DogInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
-            viewModel = mainViewModel
         }
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
@@ -55,7 +51,6 @@ class DogInfoFragment : Fragment() {
 
             Picasso.with(context)
                     .load(dog?.image?.toString()?.substringAfterLast("=")?.dropLast(1))
-
                     .resize(900, 900)
                     .centerCrop()
                     .placeholder(R.drawable.loading_animation)
@@ -107,7 +102,6 @@ class DogInfoFragment : Fragment() {
                 mainViewModel.setDog(nextDog)
                 Log.d(TAG, "nexButton: thisDog.name = ${thisDog.name}")
             }
-
         }
     }
 }
