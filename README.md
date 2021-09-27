@@ -19,6 +19,12 @@ search bar allows for filtering of the list.
 * [Retrofit](https://github.com/samyups1111/Dog_Database_app/tree/master/app/src/main/java/sam/samyups/retrofit)
 * [Picasso](https://github.com/samyups1111/Dog_Database_app/blob/master/app/src/main/java/sam/samyups/ui/DogInfoFragment.kt)
 
+## Other:
+
+* [RecyclerView](https://github.com/samyups1111/Dog_Database_app/blob/master/app/src/main/java/sam/samyups/ui/DogNamesRecyclerViewAdapter.kt)
+* [Filter Search](https://github.com/samyups1111/Dog_Database_app/blob/master/app/src/main/java/sam/samyups/ui/DogNamesRecyclerViewAdapter.kt)
+* Fragments
+
 <img src="https://github.com/samyups1111/retrofitTraining/blob/master/app/src/main/res/mipmap-hdpi/main_dog.png" height="600" width="300" />
 
 <img src="https://github.com/samyups1111/retrofitTraining/blob/master/app/src/main/res/mipmap-hdpi/dog_list.png" height="600" width="300" />
