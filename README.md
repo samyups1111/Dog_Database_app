@@ -2,7 +2,7 @@
 
 ## Intro:
 
-Dog Database implements a RESTful API to retrieve data from [https://thedogapi.com/]
+Dog Database retrieves data from the [https://thedogapi.com/] API.
 The user can select a dog from the list to see details pertatining to that breed. The 
 search bar allows for filtering of the list. 
 
